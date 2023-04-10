@@ -1,0 +1,96 @@
+name: DBT_Project
+description: ''
+version: 0.0.1
+author: sparklearner123@gmail.com
+language: sql
+buildSystem: ''
+buildSystemDetails:
+  artefactID: dbt_project
+  parentArtefactID: ''
+  buildSystem: wheel
+  author: null
+  createdAt: '2023-04-10 19:58:07'
+  modifiedAt: '2023-04-10 19:58:07'
+pipelines: {}
+datasets: {}
+templates: {}
+jobs: {}
+functions:
+  author: null
+  createdAt: '2023-04-10 19:58:07'
+  modifiedAt: '2023-04-10 19:58:07'
+  gems: {}
+  udfs: {}
+  udafs: {}
+  expressions: {}
+subgraphs: {}
+sqlModels:
+  .prophecy/metadata/sqlmodels/stg_customers:
+    name: stg_customers
+    description: null
+    author: sparklearner123@gmail.com
+    files:
+    - .prophecy/ide/models/stg_customers.json
+    - DBT_ProjectE1aSzAOX/models/staging/stg_customers.sql
+    sqlDependencies:
+      models: []
+      datasets: []
+    createdAt: '2023-04-10 19:58:08'
+    modifiedAt: '2023-04-10 19:58:08'
+  .prophecy/metadata/sqlmodels/stg_orders:
+    name: stg_orders
+    description: null
+    author: sparklearner123@gmail.com
+    files:
+    - .prophecy/ide/models/stg_orders.json
+    - DBT_ProjectE1aSzAOX/models/staging/stg_orders.sql
+    sqlDependencies:
+      models: []
+      datasets: []
+    createdAt: '2023-04-10 19:58:08'
+    modifiedAt: '2023-04-10 19:58:08'
+  .prophecy/metadata/sqlmodels/stg_payments:
+    name: stg_payments
+    description: null
+    author: sparklearner123@gmail.com
+    files:
+    - .prophecy/ide/models/stg_payments.json
+    - DBT_ProjectE1aSzAOX/models/staging/stg_payments.sql
+    sqlDependencies:
+      models: []
+      datasets: []
+    createdAt: '2023-04-10 19:58:08'
+    modifiedAt: '2023-04-10 19:58:08'
+  .prophecy/metadata/sqlmodels/orders:
+    name: orders
+    description: null
+    author: sparklearner123@gmail.com
+    files:
+    - .prophecy/ide/models/orders.json
+    - DBT_ProjectE1aSzAOX/models/orders.sql
+    sqlDependencies:
+      models: []
+      datasets: []
+    createdAt: '2023-04-10 19:58:08'
+    modifiedAt: '2023-04-10 19:58:08'
+  .prophecy/metadata/sqlmodels/customers:
+    name: customers
+    description: null
+    author: sparklearner123@gmail.com
+    files:
+    - .prophecy/ide/models/customers.json
+    - DBT_ProjectE1aSzAOX/models/customers.sql
+    sqlDependencies:
+      models: []
+      datasets: []
+    createdAt: '2023-04-10 19:58:08'
+    modifiedAt: '2023-04-10 19:58:08'
+sqlPipeline:
+  name: sqlPipeline
+  description: null
+  author: sparklearner123@gmail.com
+  createdAt: '2023-04-10 19:58:07'
+  modifiedAt: '2023-04-10 19:58:07'
+dependencies: '[]'
+projectDependencies: {}
+pipelineConfigurations: {}
