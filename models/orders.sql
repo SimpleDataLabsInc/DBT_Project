@@ -55,6 +55,16 @@ final AS (
 
 ),
 
+topOrders AS (
+
+  SELECT * 
+  
+  FROM final AS in0
+  
+  WHERE amount > 1000
+
+),
+
 Reformat AS (
 
   SELECT 
@@ -69,7 +79,7 @@ Reformat AS (
     amount AS amount,
     concat(order_id, status) AS ID_status
   
-  FROM final AS in0
+  FROM topOrders AS in0
 
 )
 
