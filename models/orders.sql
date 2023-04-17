@@ -1,56 +1,78 @@
 {% set payment_methods = ['credit_card', 'coupon', 'bank_transfer', 'gift_card'] %}
 
-with orders as (
+WITH payments AS (
 
-    select * from {{ ref('stg_orders') }}
-
-),
-
-payments as (
-
-    select * from {{ ref('stg_payments') }}
+  SELECT * 
+  
+  FROM {{ ref('stg_payments')}}
 
 ),
 
-order_payments as (
+order_payments AS (
 
-    select
-        order_id,
-
-        {% for payment_method in payment_methods -%}
-        sum(case when payment_method = '{{ payment_method }}' then amount else 0 end) as {{ payment_method }}_amount,
-        {% endfor -%}
-
-        sum(amount) as total_amount
-
-    from payments
-
-    group by order_id
+  SELECT 
+    order_id,
+    {% for payment_method in payment_methods %}
+      sum(CASE
+        WHEN payment_method = '{{ payment_method }}'
+          THEN amount
+        ELSE 0
+      END) AS {{payment_method}}_amount,
+    {% endfor %}
+    
+    sum(amount) AS total_amount
+  
+  FROM payments
+  
+  GROUP BY order_id
 
 ),
 
-final as (
+orders AS (
 
-    select
-        orders.order_id,
-        orders.customer_id,
-        orders.order_date,
-        orders.status,
+  SELECT * 
+  
+  FROM {{ ref('stg_orders')}}
 
-        {% for payment_method in payment_methods -%}
+),
 
-        order_payments.{{ payment_method }}_amount,
+final AS (
 
-        {% endfor -%}
+  SELECT 
+    orders.order_id,
+    orders.customer_id,
+    orders.order_date,
+    orders.status,
+    {% for payment_method in payment_methods %}
+      order_payments.{{payment_method}}_amount,
+    {% endfor %}
+    
+    order_payments.total_amount AS amount
+  
+  FROM orders
+  LEFT JOIN order_payments
+     ON orders.order_id = order_payments.order_id
 
-        order_payments.total_amount as amount
+),
 
-    from orders
+Reformat AS (
 
-
-    left join order_payments
-        on orders.order_id = order_payments.order_id
+  SELECT 
+    order_id AS order_id,
+    customer_id AS customer_id,
+    order_date AS order_date,
+    status AS status,
+    credit_card_amount AS credit_card_amount,
+    coupon_amount AS coupon_amount,
+    bank_transfer_amount AS bank_transfer_amount,
+    gift_card_amount AS gift_card_amount,
+    amount AS amount,
+    concat(order_id, status) AS ID_status
+  
+  FROM final AS in0
 
 )
 
-select * from final
+SELECT *
+
+FROM Reformat
